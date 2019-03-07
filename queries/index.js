@@ -1,7 +1,8 @@
 const graphql = require("graphql");
 const { GraphQLObjectType, GraphQLString, GraphQLList } = graphql;
 
-const AuthorType = require("../types/author.type");
+const AuthorQueries = require('./author.query');
+const PostQueries = require('./post.query');
 
 const RootQuery = new GraphQLObjectType({
   name: "RootQuery",
@@ -16,13 +17,9 @@ const RootQuery = new GraphQLObjectType({
       resolve(parentValue, args) {
         return `hello ${args.name}`;
       }
-    }
-    // authors: {
-    //   type: new GraphQLList(AuthorType),
-    //   resolve() {
-    //     // get all the author objects here
-    //   }
-    // }
+    },
+    ...PostQueries,
+    ...AuthorQueries,
   }
 });
 

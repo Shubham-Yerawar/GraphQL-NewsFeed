@@ -7,22 +7,29 @@ const {
   GraphQLList
 } = graphql;
 
-const AuthorType = require("./author.type.js");
+// FIXME: i dont know why it didnot work ??
+// const AuthorType = require("./author.type.js");
+
+const { getAuthorById } = require("../utils/mock/authors.mock");
 
 const PostType = new GraphQLObjectType({
   name: "PostType",
-  description: "Defines the post inctance properties",
+  description: "Defines the post instance properties",
   fields: () => ({
     id: { type: GraphQLID },
     title: { type: GraphQLString },
+    description: { type: GraphQLString },
     viewCount: { type: GraphQLInt },
     likesCount: { type: GraphQLInt },
     authors: {
-      type: new GraphQLList(AuthorType),
+      type: new GraphQLList(require("./author.type.js")), // ASK: should it be done like this
       resolve(parentValue) {
-        // here I am expecting authorId
-        // get author object from author database
-        return "some author";
+        const allAuthors = [];
+        parentValue.authors.forEach( anAuthorId => {
+          const author = getAuthorById(anAuthorId);
+          allAuthors.push(author);
+        } )
+        return allAuthors;
       }
     }
   })

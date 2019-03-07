@@ -7,7 +7,8 @@ const {
   GraphQLList
 } = graphql;
 
-const PostType = require("./post.type.js");
+// const PostType = require("./post.type.js");
+const { getAllPostsByAuthor } = require('../utils/mock/posts.mock');
 
 const AuthorType = new GraphQLObjectType({
   name: "AuthorType",
@@ -18,10 +19,10 @@ const AuthorType = new GraphQLObjectType({
     lastName: { type: GraphQLString },
     age: { type: GraphQLInt },
     posts: {
-      type: new GraphQLList(PostType),
+      type: new GraphQLList(require("./post.type.js")),
       resolve(parentValue) {
-        console.log("parent value [ for post ]", parentValue);
-        return "some post";
+        const allPosts = getAllPostsByAuthor(parentValue.id);
+        return allPosts;
       }
     }
   })
