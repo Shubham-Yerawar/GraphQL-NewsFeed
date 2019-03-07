@@ -1,0 +1,29 @@
+{
+  "name": "graphql-newsfeed",
+  "version": "1.0.0",
+  "description": "A beginners guide to GraphQL. This app aims to develop the grapgql schema, queries and mutations required for a generic newsfeed application.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shubham-Yerawar/GraphQL-NewsFeed.git"
+  },
+  "keywords": [
+    "GraphQL",
+    "NewsFeed",
+    "Starter-Kit"
+  ],
+  "author": "Shubham Yerawar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Shubham-Yerawar/GraphQL-NewsFeed/issues"
+  },
+  "homepage": "https://github.com/Shubham-Yerawar/GraphQL-NewsFeed#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "express-graphql": "^0.7.1",
+    "graphql": "^14.1.1"
+  }
+}
