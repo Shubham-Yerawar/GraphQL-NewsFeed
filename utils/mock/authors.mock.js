@@ -19,11 +19,10 @@ const authors = [
   }
 ];
 
-
 exports.getAllAuthors = () => {
   return authors;
-}
+};
 
-exports.getAuthorById = (authorId) =>{
-  return authors.filter(anAuthor => anAuthor.id === authorId)[0];
-}
+exports.getAuthorById = authorId => {
+  return authors.filter(anAuthor => anAuthor.id === parseInt(authorId))[0];
+};
