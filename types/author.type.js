@@ -7,8 +7,8 @@ const {
   GraphQLList
 } = graphql;
 
-// const PostType = require("./post.type.js");
-const { getAllPostsByAuthor } = require('../utils/mock/posts.mock');
+const PostType = require("./post.type.js");
+const { getAllPostsByAuthor } = require("../utils/mock/posts.mock");
 
 const AuthorType = new GraphQLObjectType({
   name: "AuthorType",

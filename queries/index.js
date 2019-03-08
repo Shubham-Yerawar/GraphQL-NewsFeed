@@ -1,8 +1,8 @@
 const graphql = require("graphql");
 const { GraphQLObjectType, GraphQLString, GraphQLList } = graphql;
 
-const AuthorQueries = require('./author.query');
-const PostQueries = require('./post.query');
+const AuthorQueries = require("./author.query");
+const PostQueries = require("./post.query");
 
 const RootQuery = new GraphQLObjectType({
   name: "RootQuery",

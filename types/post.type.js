@@ -8,7 +8,7 @@ const {
 } = graphql;
 
 // FIXME: i dont know why it didnot work ??
-// const AuthorType = require("./author.type.js");
+const AuthorType = require("./author.type.js");
 
 const { getAuthorById } = require("../utils/mock/authors.mock");
 
@@ -21,14 +21,26 @@ const PostType = new GraphQLObjectType({
     description: { type: GraphQLString },
     viewCount: { type: GraphQLInt },
     likesCount: { type: GraphQLInt },
+    numberOfAuthors: {
+      type: GraphQLInt,
+      description: " this is a derived field ",
+      resolve(parentValue) {
+        const allAuthors = [];
+        parentValue.authors.forEach(anAuthorId => {
+          const author = getAuthorById(anAuthorId);
+          allAuthors.push(author);
+        });
+        return allAuthors.length;
+      }
+    },
     authors: {
       type: new GraphQLList(require("./author.type.js")), // ASK: should it be done like this
       resolve(parentValue) {
         const allAuthors = [];
-        parentValue.authors.forEach( anAuthorId => {
+        parentValue.authors.forEach(anAuthorId => {
           const author = getAuthorById(anAuthorId);
           allAuthors.push(author);
-        } )
+        });
         return allAuthors;
       }
     }

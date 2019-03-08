@@ -26,6 +26,7 @@ const AuthorQueries = {
       console.log("args", args);
       const author = getAuthorById(args.id);
       console.log("author ->", author);
+      if (!author) throw new Error("could not find author");
       return author;
     }
   }
