@@ -4,7 +4,8 @@ const {
   GraphQLID,
   GraphQLString,
   GraphQLInt,
-  GraphQLList
+  GraphQLList,
+  GraphQLDeprecatedDirective
 } = graphql;
 
 const PostType = require("./post.type.js");
@@ -15,6 +16,13 @@ const AuthorType = new GraphQLObjectType({
   description: "Defines the author properties",
   fields: () => ({
     id: { type: GraphQLID },
+    name: {
+      type: GraphQLString,
+      deprecationReason: "name is now subdivided into firstName and lastName",
+      resolve(parentValue) {
+        return `${parentValue.firstName} ${parentValue.lastName}`;
+      }
+    },
     firstName: { type: GraphQLString },
     lastName: { type: GraphQLString },
     age: { type: GraphQLInt },
