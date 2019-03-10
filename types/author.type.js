@@ -28,7 +28,10 @@ const AuthorType = new GraphQLObjectType({
     age: {
       type: GraphQLInt,
       args: {
-        unit: { type: GraphQLString }
+        unit: { 
+          type: GraphQLString,
+          defaultValue: "YEARS"
+        }
       },
       resolve(parentValue,args) {
         const { age } = parentValue;
