@@ -25,7 +25,30 @@ const AuthorType = new GraphQLObjectType({
     },
     firstName: { type: GraphQLString },
     lastName: { type: GraphQLString },
-    age: { type: GraphQLInt },
+    age: {
+      type: GraphQLInt,
+      args: {
+        unit: { type: GraphQLString }
+      },
+      resolve(parentValue,args) {
+        const { age } = parentValue;
+        const { unit } = args;
+
+        switch (unit) {
+          case "DAYS": {
+            return age * 365;
+          }
+
+          case "MONTHS":{
+            return age * 12;
+          }
+
+          default: {
+            return age;
+          }
+        }
+      }
+    },
     posts: {
       type: new GraphQLList(require("./post.type.js")),
       resolve(parentValue) {
