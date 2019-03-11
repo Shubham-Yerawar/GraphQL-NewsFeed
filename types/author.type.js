@@ -4,8 +4,7 @@ const {
   GraphQLID,
   GraphQLString,
   GraphQLInt,
-  GraphQLList,
-  GraphQLDeprecatedDirective
+  GraphQLList
 } = graphql;
 
 const PostType = require("./post.type.js");
@@ -27,13 +26,14 @@ const AuthorType = new GraphQLObjectType({
     lastName: { type: GraphQLString },
     age: {
       type: GraphQLInt,
+      description: "age can be in DAYS or MONTHS or YEARS (default)",
       args: {
-        unit: { 
+        unit: {
           type: GraphQLString,
           defaultValue: "YEARS"
         }
       },
-      resolve(parentValue,args) {
+      resolve(parentValue, args) {
         const { age } = parentValue;
         const { unit } = args;
 
@@ -42,7 +42,7 @@ const AuthorType = new GraphQLObjectType({
             return age * 365;
           }
 
-          case "MONTHS":{
+          case "MONTHS": {
             return age * 12;
           }
 
