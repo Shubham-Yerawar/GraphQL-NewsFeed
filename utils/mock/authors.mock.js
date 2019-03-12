@@ -2,21 +2,21 @@ const lodash = require("lodash");
 
 const authors = [
   {
-    id: 1,
+    id: "1",
     firstName: "Jon",
     lastName: "Snow",
     age: 24,
     isDeleted: false
   },
   {
-    id: 2,
+    id: "2",
     firstName: "Samwell",
     lastName: "Tarly",
     age: 22,
     isDeleted: false
   },
   {
-    id: 3,
+    id: "3",
     firstName: "Cersi",
     lastName: "Lannister",
     age: 30,
@@ -33,7 +33,7 @@ exports.getAllAuthors = () => {
 };
 
 exports.getAuthorById = authorId => {
-  return authors.filter(anAuthor => anAuthor.id === parseInt(authorId))[0];
+  return authors.filter(anAuthor => anAuthor.id === authorId)[0];
 };
 
 exports.addAuthor = author => {
