@@ -5,9 +5,7 @@ const {
   GraphQLIncludeDirective,
   GraphQLSkipDirective
 } = graphql;
-const {
-  applySchemaCustomDirectives
-} = require("../directives/custom.directive");
+const { applySchemaCustomDirectives } = require("graphql-custom-directives");
 
 const GraphQLUppercaseDirective = require("../directives/uppercase.directive");
 

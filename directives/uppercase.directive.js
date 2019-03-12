@@ -1,4 +1,6 @@
-const { GraphQLCustomDirective } = require("./custom.directive");
+// const { GraphQLCustomDirective } = require("./custom.directive");
+
+const { GraphQLCustomDirective } = require("graphql-custom-directives");
 
 var GraphQLUppercaseDirective = GraphQLCustomDirective({
   name: "uppercase",
