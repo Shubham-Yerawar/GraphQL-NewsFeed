@@ -24,7 +24,6 @@ const PostQueries = {
     },
     resolve(parentValue, args) {
       const post = getPostById(args.id);
-      if (!post) throw new Error("Could not find specified post");
       return post;
     }
   }

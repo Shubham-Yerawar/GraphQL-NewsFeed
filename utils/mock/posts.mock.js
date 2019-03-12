@@ -40,7 +40,9 @@ exports.getAllPostsByAuthor = authorId => {
 };
 
 exports.getPostById = postId => {
-  return posts.filter(aPost => aPost.id === postId)[0];
+  const post = posts.filter(aPost => aPost.id === postId)[0];
+  if (!post) throw new Error("Invalid post id");
+  return post;
 };
 
 exports.addPost = newPost => {
@@ -57,16 +59,29 @@ exports.addPost = newPost => {
 
 exports.updatePost = (id, newValuesForPost) => {
   const index = lodash.findIndex(posts, { id: id });
-  console.log("new index", index);
+  if (index === -1) {
+    throw new Error("Post now found");
+  }
   const oldValues = posts[index];
   const updatedPost = {
     id: id,
     ...oldValues,
     ...newValuesForPost
   };
-  console.log("new values", oldValues);
-  console.log("new values", updatedPost);
   posts.splice(index, 1, updatedPost);
-  console.log("all posts ->", posts);
+  return updatedPost;
+};
+
+exports.likePost = id => {
+  const index = lodash.findIndex(posts, { id: id });
+  if (index === -1) {
+    throw new Error("Post now found");
+  }
+  const oldValues = posts[index];
+  const updatedPost = {
+    ...oldValues,
+    likesCount: oldValues.likesCount + 1
+  };
+  posts.splice(index, 1, updatedPost);
   return updatedPost;
 };

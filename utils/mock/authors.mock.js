@@ -33,7 +33,9 @@ exports.getAllAuthors = () => {
 };
 
 exports.getAuthorById = authorId => {
-  return authors.filter(anAuthor => anAuthor.id === authorId)[0];
+  const author = authors.filter(anAuthor => anAuthor.id === authorId)[0];
+  if (!author) throw new Error("Author not found");
+  return author;
 };
 
 exports.addAuthor = author => {

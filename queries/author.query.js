@@ -24,7 +24,6 @@ const AuthorQueries = {
     },
     resolve(parentValue, args) {
       const author = getAuthorById(args.id);
-      if (!author) throw new Error("could not find author");
       return author;
     }
   }

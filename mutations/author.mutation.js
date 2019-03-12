@@ -37,10 +37,10 @@ const AuthorMutations = {
     resolve(parentValue, args) {
       // check if the author exists in system
       const author = getAuthorById(args.id);
-      if (!author)
-        throw new Error(
-          "Author with given ID does not exists.. try adding author"
-        );
+      // if (!author)
+      //   throw new Error(
+      //     "Author with given ID does not exists.. try adding author"
+      //   );
       const updatedAuthor = updateAuthor(args.id, args);
       return updatedAuthor;
     }
