@@ -11,14 +11,16 @@ const PostType = require("./post.type.js");
 const { getAllPostsByAuthor } = require("../utils/mock/posts.mock");
 
 const AuthorType = new GraphQLObjectType({
-  name: "AuthorType",
-  description: "Defines the author properties",
+  name: "AuthorType", // name of the type
+  description: "Defines the author properties", // description of the type
   fields: () => ({
+    // properties or attributes on the type
     id: { type: GraphQLID },
     name: {
       type: GraphQLString,
-      deprecationReason: "name is now subdivided into firstName and lastName",
+      deprecationReason: "name is now subdivided into firstName and lastName", // deprecated field
       resolve(parentValue) {
+        // but some older clients may still be requesting it so need to resolve it as well
         return `${parentValue.firstName} ${parentValue.lastName}`;
       }
     },
@@ -28,6 +30,7 @@ const AuthorType = new GraphQLObjectType({
       type: GraphQLInt,
       description: "age can be in DAYS or MONTHS or YEARS (default)",
       args: {
+        // accepting field level arguments to tranform the field's value at the server side only
         unit: {
           type: GraphQLString,
           defaultValue: "YEARS"
@@ -52,6 +55,12 @@ const AuthorType = new GraphQLObjectType({
         }
       }
     },
+    /**
+     *  Author - Post relationship:
+     *  we are storing the reference of authors in post.authors
+     *  so we can use this relationship here to get all the posts
+     *  authored/co-authored by the current author
+     */
     posts: {
       type: new GraphQLList(require("./post.type.js")),
       resolve(parentValue) {
