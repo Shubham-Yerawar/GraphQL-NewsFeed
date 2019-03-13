@@ -1,27 +1,22 @@
 // schema related dependencies
-const graphql = require("graphql");
+const { applySchemaCustomDirectives } = require("graphql-custom-directives");
 const {
   GraphQLSchema,
   GraphQLIncludeDirective,
   GraphQLSkipDirective
-} = graphql;
-const { applySchemaCustomDirectives } = require("graphql-custom-directives");
-
-const GraphQLUppercaseDirective = require("../directives/uppercase.directive");
+} = require("graphql");
 
 const RootQuery = require("../queries");
 const Mutations = require("../mutations");
+const Directives = require("../directives");
 
 const schema = new GraphQLSchema({
   query: RootQuery,
   mutation: Mutations,
-  directives: [
-    GraphQLUppercaseDirective.GraphQLUppercaseDirective,
-    GraphQLIncludeDirective,
-    GraphQLSkipDirective
-  ]
+  directives: [...Directives, GraphQLIncludeDirective, GraphQLSkipDirective]
 });
 
+// to make schema aware about the custom directives
 applySchemaCustomDirectives(schema);
 
 module.exports = schema;

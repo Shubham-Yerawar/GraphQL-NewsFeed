@@ -1,5 +1,5 @@
 const graphql = require("graphql");
-const { GraphQLList, GraphQLID } = graphql;
+const { GraphQLList, GraphQLID, GraphQLInt } = graphql;
 
 const PostType = require("../types/post.type");
 const { getAllPosts, getPostById } = require("../utils/mock/posts.mock");
@@ -9,8 +9,21 @@ const PostQueries = {
     name: "Posts",
     description: "returns all the posts information",
     type: new GraphQLList(PostType),
-    resolve() {
-      const allPosts = getAllPosts();
+    args:{
+      limit: { 
+        type : GraphQLInt,
+        defaultValue: 2,
+        description: "number of posts to be fetched in a request"
+      },
+      offset:{
+        type: GraphQLInt,
+        defaultValue: 0,
+        description: "number of posts to skip"
+      }
+    },
+    resolve(parentValue, args) {
+      const { limit, offset } = args;
+      const allPosts = getAllPosts(limit, offset);
       return allPosts;
     }
   },

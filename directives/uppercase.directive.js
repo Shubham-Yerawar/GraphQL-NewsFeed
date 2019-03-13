@@ -9,6 +9,7 @@ var GraphQLUppercaseDirective = GraphQLCustomDirective({
   resolve(resolve, source, args) {
     return resolve().then(input => {
       const stringToReturn = `${input}`;
+      console.log(" [ Uppercase Directive ] string ->", stringToReturn);
       return stringToReturn.toUpperCase();
     });
   }
