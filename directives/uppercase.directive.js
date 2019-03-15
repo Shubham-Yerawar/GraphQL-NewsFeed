@@ -6,10 +6,9 @@ var GraphQLUppercaseDirective = GraphQLCustomDirective({
   name: "uppercase",
   description: `transforms your string to uppercase. should only be used with string type`,
   locations: ["FIELD"],
-  resolve(resolve, source, args) {
+  resolve(resolve, parentValue, args) {
     return resolve().then(input => {
       const stringToReturn = `${input}`;
-      console.log(" [ Uppercase Directive ] string ->", stringToReturn);
       return stringToReturn.toUpperCase();
     });
   }

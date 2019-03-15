@@ -63,20 +63,24 @@ const AuthorType = new GraphQLObjectType({
      */
     posts: {
       type: new GraphQLList(require("./post.type.js")),
-      args:{
-        limit: { 
-          type : GraphQLInt,
+      args: {
+        limit: {
+          type: GraphQLInt,
           defaultValue: 2,
           description: "number of posts to be fetched in a request"
         },
-        offset:{
+        offset: {
           type: GraphQLInt,
           defaultValue: 0,
           description: "number of records to skip"
         }
       },
-      resolve(parentValue,args) {
-        const allPosts = getAllPostsByAuthor(parentValue.id, args.limit, args.offset);
+      resolve(parentValue, args) {
+        const allPosts = getAllPostsByAuthor(
+          parentValue.id,
+          args.limit,
+          args.offset
+        );
         return allPosts;
       }
     }

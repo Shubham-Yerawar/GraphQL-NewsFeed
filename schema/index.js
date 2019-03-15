@@ -6,14 +6,15 @@ const {
   GraphQLSkipDirective
 } = require("graphql");
 
-const RootQuery = require("../queries");
+const Query = require("../queries");
 const Mutations = require("../mutations");
 const Directives = require("../directives");
 
 const schema = new GraphQLSchema({
-  query: RootQuery,
-  mutation: Mutations,
-  directives: [...Directives, GraphQLIncludeDirective, GraphQLSkipDirective]
+  query: Query, // required
+  mutation: Mutations, // optional
+  // subscription: someSubscriptions, // optional
+  directives: [...Directives, GraphQLIncludeDirective, GraphQLSkipDirective] // optional
 });
 
 // to make schema aware about the custom directives
