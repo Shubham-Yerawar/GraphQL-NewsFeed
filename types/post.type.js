@@ -7,9 +7,6 @@ const {
   GraphQLList
 } = graphql;
 
-// FIXME: i dont know why it didnot work ??
-// const AuthorType = require("./author.type.js");
-
 const { getAuthorById } = require("../utils/mock/authors.mock");
 
 const PostType = new GraphQLObjectType({
@@ -22,13 +19,13 @@ const PostType = new GraphQLObjectType({
     viewCount: { type: GraphQLInt },
     likesCount: { type: GraphQLInt },
     authors: {
-      type: new GraphQLList(require("./author.type.js")), // ASK: should it be done like this
+      type: new GraphQLList(require("./author.type.js")),
       resolve(parentValue) {
         const allAuthors = [];
-        parentValue.authors.forEach( anAuthorId => {
+        parentValue.authors.forEach(anAuthorId => {
           const author = getAuthorById(anAuthorId);
           allAuthors.push(author);
-        } )
+        });
         return allAuthors;
       }
     }
