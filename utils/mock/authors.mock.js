@@ -50,6 +50,8 @@ exports.addAuthor = author => {
 
 exports.updateAuthor = (id, newValuesForAuthor) => {
   const index = lodash.findIndex(authors, { id: id });
+  if (index === -1)
+    throw new Error("Author Not found.. try checking the provided author id");
   const oldValues = authors[index];
   const updatedAuthor = {
     ...oldValues,
@@ -61,6 +63,8 @@ exports.updateAuthor = (id, newValuesForAuthor) => {
 
 exports.deleteAuthor = id => {
   const index = lodash.findIndex(authors, { id: id });
+  if (index === -1)
+    throw new Error("Author Not found.. try checking the provided author id");
   const author = authors[index];
   const updatedAuthor = {
     ...author,

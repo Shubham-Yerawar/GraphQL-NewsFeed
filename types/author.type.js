@@ -17,6 +17,7 @@ const AuthorType = new GraphQLObjectType({
     // properties or attributes on the type
     id: { type: GraphQLID },
     name: {
+      // this is a deprecated field but older versions of client may still be using it
       type: GraphQLString,
       deprecationReason: "name is now subdivided into firstName and lastName", // deprecated field
       resolve(parentValue) {

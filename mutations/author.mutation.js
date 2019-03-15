@@ -1,5 +1,5 @@
 const graphql = require("graphql");
-const { GraphQLNonNull, GraphQLString, GraphQLInt } = graphql;
+const { GraphQLNonNull, GraphQLString, GraphQLInt, GraphQLID } = graphql;
 
 const AuthorType = require("../types/author.type");
 const {
@@ -29,18 +29,12 @@ const AuthorMutations = {
     description: "updates author",
     type: AuthorType,
     args: {
-      id: { type: GraphQLNonNull(GraphQLInt) },
+      id: { type: GraphQLNonNull(GraphQLID) },
       firstName: { type: GraphQLString },
       lastName: { type: GraphQLString },
       age: { type: GraphQLInt }
     },
     resolve(parentValue, args) {
-      // check if the author exists in system
-      const author = getAuthorById(args.id);
-      // if (!author)
-      //   throw new Error(
-      //     "Author with given ID does not exists.. try adding author"
-      //   );
       const updatedAuthor = updateAuthor(args.id, args);
       return updatedAuthor;
     }
@@ -50,7 +44,7 @@ const AuthorMutations = {
     description: "removes author from the system",
     type: AuthorType,
     args: {
-      id: { type: GraphQLNonNull(GraphQLInt) }
+      id: { type: GraphQLNonNull(GraphQLID) }
     },
     resolve(parentValue, args) {
       const deletedAuthor = deleteAuthor(args.id);
